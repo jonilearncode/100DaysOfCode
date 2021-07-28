@@ -1,9 +1,10 @@
 """
 Program: name-generator
-Description: Console program that prompts for two string values and retrieve them combined to form a new string name.
+Description: Console program that prompts for two string values and 
+retrieve them combined to form a new string name.
 Author: Joao Teixeira
 Date: 2021.07
-Version: 1.202107
+Version: 2.202107
 """
 
 import random
@@ -20,3 +21,5 @@ else:
     band_name = pet_name + "'s " + city_name
     
 print(f'Your band should be named as: "{band_name}"')
+
+input("Press enter to exit . . .")
