@@ -110,7 +110,7 @@ def print_spaced_chars(a_string):
     result += ' ' + c
   print(result) 
 
-def draw_screen(a_word, a_logo, a_guessed_word, a_hang_state):
+def draw_screen(a_logo, a_guessed_word, a_hang_state):
   system('cls')
   print(a_logo)
   print_spaced_chars(a_guessed_word)
@@ -125,7 +125,7 @@ guessed_word = len(word) * '_'
 # Loop until gameover:
 while not gameover:
   # Intro & logo
-  draw_screen(word, logo, guessed_word, state)
+  draw_screen(logo, guessed_word, state)
   #-- Input for guess a letter
   ##-- In case correct -- show the word with guessed letter and blanks
   ##-- In case negative -- show the word with blanks and failure message
