@@ -6,6 +6,7 @@ Author: Joao Teixeira
 Date: 2021.07
 Version: 1.202107
 """
+
 import random
 from os import system
 
@@ -111,7 +112,6 @@ def print_spaced_chars(a_string):
 
 def draw_screen(a_word, a_logo, a_guessed_word, a_hang_state):
   system('cls')
-  print("DEBUG- word: " + a_word)
   print(a_logo)
   print_spaced_chars(a_guessed_word)
   print_hangman_state(a_hang_state)
@@ -121,7 +121,6 @@ gameover = False
 state = 0
 word = generate_new_word(word_list)
 guessed_word = len(word) * '_'
-
 
 # Loop until gameover:
 while not gameover:
@@ -145,6 +144,5 @@ while not gameover:
   elif state >= len(hangman_stages) - 1:
     print("\n -- YOU LOSE ! -- ")
     gameover = True
-
 
 input("\n\nType any key to exit ...")

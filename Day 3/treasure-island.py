@@ -59,7 +59,6 @@ def test_answer(quest, answer):
         return True
     return False
     
-
 def set_quest(quest):
     answer = input([k for k in quest.keys()][0] + "\n")
     if test_answer(quest, answer):
