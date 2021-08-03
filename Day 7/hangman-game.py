@@ -122,7 +122,6 @@ state = 0
 word = generate_new_word(word_list)
 guessed_word = len(word) * '_'
 
-# Loop until gameover:
 while not gameover:
   # Intro & logo
   draw_screen(logo, guessed_word, state)

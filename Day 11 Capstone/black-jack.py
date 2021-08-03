@@ -3,9 +3,10 @@ Program: black-jack
 Description: A console Black Jack card game. 
 Emulates infinite decks for the dealer. 
 Card extraction doesn't change probabilities for the next 'hit'.
+Split cards is not featured.
 Author: Joao Teixeira
 Date: 2021.08
-Version: 1.202108
+Version: 1.202108   
 """
 
 # Basic Blackjack Rules:
@@ -67,8 +68,15 @@ def p_stand():
 
 def get_hand_score(hand):
     total = 0
+    catch_11_index = -1
     for c in hand:
+        if c == 11:
+            catch_11_index = c
         total += int(c)
+    # implement ace double value 11 or 1
+    if catch_11_index > 0 and total > 21:
+        # we want ace to equal 1 instead 11.
+        total -= 10
     return total
 
 def show_hands():
