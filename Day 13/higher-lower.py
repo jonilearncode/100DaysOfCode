@@ -6,7 +6,6 @@ Date: 2021.08
 Version: 1.202108
 """
 
-from math import trunc
 from hl_db import data
 from hl_art import logo, vs
 
