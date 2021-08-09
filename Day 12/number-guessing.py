@@ -34,6 +34,7 @@ def assert_input(desired_input_list, test_input):
             if i == j:
                 return True
     return False
+
 def evaluate_result(user_number, target_number):
     test = user_number - target_number
     if test == 0:
@@ -53,7 +54,6 @@ def apply_difficulty(dif):
         return 5
 
 # Main Logic
-
 # Intro & Logo
 print(LOGO)
 print(INTRO)
@@ -92,4 +92,3 @@ while is_game_on:
     if not input("\n\nPlay again (y/n)?  ") == 'y':
         print("Bye bye!")
         is_game_on == False
-

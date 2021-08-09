@@ -1,7 +1,7 @@
 """
 Program: coffee-machine
 Description: Main logic for a coffee machine. Managing resources and currency to sell
-coffee products to user.
+coffee products to user. Implementation done with PROCEDURAL PROGRAMMING.
 Author: Joao Teixeira
 Date: 2021.08
 Version: 1.202108
