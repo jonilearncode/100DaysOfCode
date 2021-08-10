@@ -1,3 +1,11 @@
+"""
+Program: quiz-game-OOP
+Description: Quiz game in python. Implementation done with OOP.
+Author: Joao Teixeira
+Date: 2021.08
+Version: 1.202108
+"""
+
 from question_model import QuestionModel, DataBase
 from quiz_brain import QuizBrain
 import os
