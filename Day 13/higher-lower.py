@@ -8,7 +8,6 @@ Version: 1.202108
 
 from hl_db import data
 from hl_art import logo, vs
-
 import random, os
 
 # Globals

@@ -8,41 +8,41 @@ Date: 2021.08
 Version: 1.202108
 """
 
-import colorgram, os, math
+import colorgram, random
 import turtle
 
-
-# Hirst paint is a n amount of circle colours drawn in a square arrangement.
-# Extract a colour pallet from target image.
-# Define the printer movement per n circles.
-# Print each spot with a random colour from the pallet.
-
 # Globals   
-circles_amount = 30
-circles_size = 5
-colors_pallet = colorgram.extract('himg.png', 50)
-
-# Aux methods
-def get_square_pattern_coordinates(num_circles, circles_siz, screen_siz):
-    coordinates = []
-    num_col = int(screen_siz[0] / (math.sqrt(num_circles) * circles_siz * 2)) 
-    num_li = int(screen_siz[1] / (math.sqrt(num_circles) * circles_siz * 2))
-    # print('num_li', num_li, '   num_col', num_col)
-    for x in range(num_col):
-        for y in range(num_li):
-            coordinates.append([x,y])
-    return coordinates
-
-# Main Logic
+n_columns = 20
+n_lines = 20
+circles_size = 25
+origin_offset = (25, 25) # manual correction of turtle screen origin position.
+colors_pallet = colorgram.extract('himg.png', 50) # extract colors pallet from a image.
 screen = turtle.Screen()
 pointer = turtle.Turtle()
-# Define the movement with turtle module.
+pointer.speed('fast')
 screen_size = screen.screensize()
+screen.colormode(255)
 
-tgt_list = get_square_pattern_coordinates(circles_amount, circles_size, screen_size)
-for coord in tgt_list:
-    pointer.goto(coord[0], coord[1])
-# pointer.dot(100)
-# print(colors_pallet)
-
+# Main Logic
+origin = (-screen_size[0] - origin_offset[0], -screen_size[1]) # left down corner.
+next_pos = None
+# Define the width (column) and height (line) for the dot drawing center pos.
+dot_draw_margins = (int((screen_size[0] * 2) / n_columns), int((screen_size[1] * 2) / n_lines))
+print_center_point = (dot_draw_margins[0] + circles_size / 2, dot_draw_margins[1] + circles_size / 2)
+while True:
+    if next_pos == None:
+        next_pos = origin
+    else:
+        # Evaluate screen borders to stop draw, and advance a new column.
+        next_pos = (next_pos[0] + print_center_point[0], next_pos[1])
+    pointer.pu()
+    pointer.setpos(next_pos)
+    pointer.pd()
+    colorgram_colour = colors_pallet[random.randint(0, len(colors_pallet) - 1)].rgb
+    pointer.dot(circles_size, (colorgram_colour.r, colorgram_colour.g, colorgram_colour.b))
+    # Evaluate screen borders to stop draw, and reset new line.
+    if next_pos[0] >= screen_size[0] and not next_pos[1] >= screen_size[1]:
+        next_pos = (origin[0] - print_center_point[0], next_pos[1] + print_center_point[1])
+    if next_pos[1] >= screen_size[1]:
+        break
 screen.exitonclick()
