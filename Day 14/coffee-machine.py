@@ -7,21 +7,25 @@ Date: 2021.08
 Version: 1.202108
 """
 
-# Main Loop
-# - Scoop for input with standard input('What would you like? (espresso/latte/cappuccino): ')
-# - Evaluate input from pre-actions ('off', 'report', 'espressolatte/cappuccino') 
-# - If 'coffee'
-# - - Display price and prompt for money (quarters = $0.25, dimes = $0.10, nickles = $0.05, pennies = $0.01)
-# - - Eval transaction/change
-# - - - If good, brew coffee
-# - - - Update report (report = Water: 100ml Milk: 50ml Coffee: 76g Money: $2.5)
-# - - - Print final result “Here is your {coffee_choice}. Enjoy!”
-
 import time, os
 
 # Globals
-intro = 'Welcome to PyCoffeeMachine. Made by Joao Teixeira 2021.'
-logo = ''
+intro = '\nWelcome to PyCoffeeMachine. Made by Joao Teixeira 2021.'
+logo = """
+
+    (  )   (   )  )
+     ) (   )  (  (
+     ( )  (    ) )
+     _____________
+    <_____________> ___
+    |             |/ _ \ 
+    |               | | |
+    |               |_| |
+ ___|             |\___/
+/    \___________/    \ 
+\_____________________/
+
+"""
 txt_switch_off = 'Goodbye!'
 resources = {'raw' : {'water' : 100, 
                       'milk' : 50, 
@@ -35,7 +39,6 @@ resources = {'raw' : {'water' : 100,
                        'latte' : 1.50,
                        'cappuccino' : 2.50}
              }
-
 credit_in_session = 0.0
 
 # Aux methods
@@ -100,7 +103,7 @@ def run_waiting(time_per_tick):
     time.sleep(time_per_tick)
 
 # Main Logic
-print(intro)
+print(logo, intro)
 while True:
     print(f'\nCredit: {credit_in_session}€')
     user_input = input('What would you like? (espresso/latte/cappuccino):  ').lower()
