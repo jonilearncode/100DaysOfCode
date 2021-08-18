@@ -7,16 +7,6 @@ Date: 2021.08
 Version: 1.202108
 """
 
-# Main Loop
-# - Scoop for input with standard input('What would you like? (espresso/latte/cappuccino): ')
-# - Evaluate input from pre-actions ('off', 'report', 'espressolatte/cappuccino') 
-# - If 'coffee'
-# - - Display price and prompt for money (quarters = $0.25, dimes = $0.10, nickles = $0.05, pennies = $0.01)
-# - - Eval transaction/change
-# - - - If good, brew coffee
-# - - - Update report (report = Water: 100ml Milk: 50ml Coffee: 76g Money: $2.5)
-# - - - Print final result “Here is your {coffee_choice}. Enjoy!”
-
 from menu import Menu, MenuItem
 from coffee_maker import CoffeeMaker
 from money_machine import MoneyMachine
