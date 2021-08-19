@@ -11,13 +11,11 @@ class SnakeFood():
         self.food.shape('circle')
         self.food.goto(pos)
         self.food.st()
+        self.food.speed('fastest')
         
-    def delete_food(self, food_pos):
-        if self.food.position()[0] == food_pos[0] and self.food.position()[1] == food_pos[1]:
-            self.eaten_food_amount += 1
-            self.food.ht()
-        else:
-            print(f'ERROR - class SnakeFood, delete_food() can\'t delete food at pos = {food_pos}.')
+    def delete_food(self):
+        self.eaten_food_amount += 1
+        self.food.ht()
     
     def create_food(self, food_pos):
         self.food.goto(food_pos)
