@@ -7,14 +7,6 @@ Date: 2021.08
 Version: 1.202108
 """
 
-# |V| Create a snake body 
-# |V| Move the snake
-# |V| Create snake food
-# |V| Detect collision with food
-# |V| Create scoreboard
-# |V| Detect collisicon with wall
-# |V| Detect collision with tail
-
 import turtle, random, time
 from snake_food import SnakeFood
 
