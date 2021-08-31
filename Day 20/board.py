@@ -31,5 +31,6 @@ class Board(Turtle):
         else:
             self.paddle.goto(self.paddle.position()[0], -self.screen_size[1] + 5)
     
-    
+    def get_position(self):
+        return self.paddle.position()
     

@@ -14,8 +14,6 @@ screen = turtle.Screen()
 pointer = turtle.Turtle()
 screen.listen()
 pointer_speed = 15
-# screen_size = screen.screensize()
-# screen.colormode(255)
 
 # Aux methods
 def move_forward():
@@ -42,5 +40,4 @@ screen.onkeypress(move_backward, 's')
 screen.onkeypress(rot_left, 'a')
 screen.onkeypress(rot_right, 'd')
 screen.onkeypress(clear_screen, 'c')
-
 screen.exitonclick()

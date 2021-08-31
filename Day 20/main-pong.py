@@ -41,6 +41,7 @@ while not game_over:
    # Run game
    screen.onkeypress(player.move_up, 'w')
    screen.onkeypress(player.move_down, 's')
+   ball.move(player.get_position())
 
    time.sleep(0.01)
    screen.update() # draw graphics
