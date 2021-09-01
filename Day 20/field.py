@@ -8,6 +8,12 @@ class Field(Turtle):
     def __init__(self):
         super().__init__()
         self.middle_field_dots = []
+        self.score = Turtle()
+        self.score.ht()
+        self.score.pu()
+        self.score.speed('fastest')
+        self.score.color('white')
+        self.score.goto(0, 250)
     
     def draw_middle_field(self, center_pos, screen_size_y):
         num_of_dots = int(screen_size_y / (MIDDLE_FIELD_DOT_SIZE[1]))
@@ -20,7 +26,11 @@ class Field(Turtle):
             self.middle_field_dots[i].shape('square')
             self.middle_field_dots[i].goto(center_pos[0], int(screen_size_y - MIDDLE_FIELD_DOT_SIZE[1] * i * 2))
             self.middle_field_dots[i].st()
+        # Grant space for the SCORE label
+        self.middle_field_dots[0].ht()
+        self.middle_field_dots[1].ht()
+        self.middle_field_dots[2].ht()
     
-    def draw_score_board(self, center_pos, score):
-        # draw score tuple in the top screen
-        pass
+    def draw_score_board(self, score):
+        self.score.write(f'{score[0]} SCORE {score[1]}', False, align="center", font=("Arial", 24, "bold"))
+
