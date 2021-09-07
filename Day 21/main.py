@@ -23,8 +23,8 @@ STARTING_MOVE_DISTANCE = 5
 MOVE_INCREMENT = 10
 
 # Aux Methods
-def create_cars_wave(cars_wave_list):
-   cars_wave_list.append(CarManager(screen_size, COLORS, STARTING_MOVE_DISTANCE, MOVE_INCREMENT))
+def create_cars_wave(cars_wave_list, level):
+   cars_wave_list.append(CarManager(screen_size, COLORS, STARTING_MOVE_DISTANCE + STARTING_MOVE_DISTANCE * 0.1 * level))
    cars_wave_list[len(cars_wave_list)-1].initialize_cars()
 
 # Setup/Initialize
@@ -36,44 +36,63 @@ screen.tracer(0) # stop graphics drawing
 screen_size = screen.screensize()
 
 game_over = False
+game_loop = True
+pass_level = False
+creation_state = False
 level = 0
 
 # scoreboard = Scoreboard()
 # scoreboard.draw_score_board(level)
 
 player = Player(STARTING_POSITION, screen_size, MOVE_DISTANCE)
+scoreboard = Scoreboard(level)
+scoreboard.draw_score_board(level)
 cars_waves = []
-create_cars_wave(cars_waves) # initialize with one wave
+create_cars_wave(cars_waves, level) # initialize with one wave
 
-creation_state = False
 
 # Draw
 while not game_over:
-   # Update GUI
    
-   # Run game
-   screen.onkeypress(player.move_up, 'w')
-   
-   for i in range(0, len(cars_waves)):
-      print('1inside for loop -- ', len(cars_waves))
-      cars_waves[i].move()
-      if cars_waves[i].check_if_wave_is_finished() and not cars_waves[i].to_del():
-         creation_state = True
-         cars_waves[i].marked_for_delete = True
-      # Eval waves memory leak and delete
-      if creation_state:
-         create_cars_wave(cars_waves)
-         creation_state = False
-      elif len(cars_waves) > 4:
-         del cars_waves[i]
+   if pass_level:
+      level += 1
+      print(f'DEBUG Level = {level}')
+      game_loop = not game_loop
+      pass_level = False
+      while len(cars_waves) > 0:
+         cars_waves[0].delete()
+         cars_waves.pop(0)
+      cars_waves.clear()
+      create_cars_wave(cars_waves, level)
+      player.reset_pos()
       
-   # Eval Win conditions
-  
+   while game_loop:
+      # Run game
+      screen.onkeypress(player.move_up, 'w')
+      screen.onkeypress(player.move_down, 's')
+      for i in range(0, len(cars_waves)):
+         cars_waves[i].move()
+         if cars_waves[i].check_if_wave_is_on_initial() and not cars_waves[i].to_del():
+            creation_state = True
+            cars_waves[i].marked_for_delete = True
+         # Eval waves memory leak and delete
+         if creation_state:
+            create_cars_wave(cars_waves, level)
+            creation_state = False
+         if len(cars_waves) > 5 and cars_waves[i].check_if_wave_is_finished():
+            del cars_waves[0]
+            break
+      # Eval Win conditions
+      if player.has_reach_finish_line((0, screen_size[1])):
+         game_loop = False
+         pass_level = True
+      
+      # Update GUI
+      scoreboard.gui.clear()
+      scoreboard.draw_score_board(level)
+         
+      time.sleep(0.1)
+      screen.update() # draw graphics
+
    
-   # scoreboard.score.clear()
-   # scoreboard.draw_score_board(level)
-   
-   time.sleep(0.1)
-   screen.update() # draw graphics
-    
 screen.exitonclick()
