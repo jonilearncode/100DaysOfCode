@@ -72,6 +72,15 @@ while not game_over:
       screen.onkeypress(player.move_down, 's')
       for i in range(0, len(cars_waves)):
          cars_waves[i].move()
+         # Detect collisions
+         for car in cars_waves[i].cars:
+            if car.position()[0] < 80 and car.position()[0] > -80: # filter the car in cars per cars_wave if are close the x_value of player 
+               print(f'[DEBUG] main --> Player is EVAL COL')
+               if player.is_colliding(car):
+                  print(f'[DEBUG] main --> Player is colliding!')
+                  game_loop = False
+                  game_over = True
+                  break
          if cars_waves[i].check_if_wave_is_on_initial() and not cars_waves[i].to_del():
             creation_state = True
             cars_waves[i].marked_for_delete = True
@@ -82,10 +91,12 @@ while not game_over:
          if len(cars_waves) > 5 and cars_waves[i].check_if_wave_is_finished():
             del cars_waves[0]
             break
+      
       # Eval Win conditions
       if player.has_reach_finish_line((0, screen_size[1])):
          game_loop = False
          pass_level = True
+      
       
       # Update GUI
       scoreboard.gui.clear()
@@ -94,5 +105,6 @@ while not game_over:
       time.sleep(0.1)
       screen.update() # draw graphics
 
-   
+# scoreboard.gui.draw_gameover()
+print('GAME OVER!')   
 screen.exitonclick()

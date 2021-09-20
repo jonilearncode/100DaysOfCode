@@ -39,6 +39,12 @@ class Player(Turtle):
         else:
             return False
     
+    def is_colliding(self, car):
+        print(f'[DEBUG] Player() pos = {self.player.position()} --- car pos = {car.position()}')
+        if self.player.distance(car.position()) < 10:
+            return True
+        return False
+    
     def reset_pos(self):
         self.player.ht()
         self.player.goto(self.starting_position)
