@@ -24,7 +24,6 @@ class Player(Turtle):
             self.player.goto(self.player.position()[0], self.screen_size[1] - 5)
     
     def move_down(self):
-        print(self.player.position(), ' screen= ', self.screen_size)
         if self.player.position()[1] > -self.screen_size[1]:
             self.player.goto(self.player.position()[0], self.player.position()[1] - self.velocity_y)
         else:
@@ -40,8 +39,8 @@ class Player(Turtle):
             return False
     
     def is_colliding(self, car):
-        print(f'[DEBUG] Player() pos = {self.player.position()} --- car pos = {car.position()}')
-        if self.player.distance(car.position()) < 10:
+        # print(f'[DEBUG] Player() pos = {self.player.position()} --- car pos = {car.position()}')
+        if self.player.distance(car.position()) < 25:
             return True
         return False
     

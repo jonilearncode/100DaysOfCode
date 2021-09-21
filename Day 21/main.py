@@ -75,7 +75,7 @@ while not game_over:
          # Detect collisions
          for car in cars_waves[i].cars:
             if car.position()[0] < 80 and car.position()[0] > -80: # filter the car in cars per cars_wave if are close the x_value of player 
-               print(f'[DEBUG] main --> Player is EVAL COL')
+               # print(f'[DEBUG] main --> Player is EVAL COL')
                if player.is_colliding(car):
                   print(f'[DEBUG] main --> Player is colliding!')
                   game_loop = False
@@ -105,6 +105,7 @@ while not game_over:
       time.sleep(0.1)
       screen.update() # draw graphics
 
-# scoreboard.gui.draw_gameover()
-print('GAME OVER!')   
+scoreboard.draw_gameover()
+print('GAME OVER!')
+   
 screen.exitonclick()
