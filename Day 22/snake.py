@@ -1,6 +1,6 @@
 """
 Program: snake
-Description: Snake game in Python! Using turtle module.
+Description: Snake game in Python! Using turtle module. Added saving data locally.
 Implementation done with OOP.
 Author: Joao Teixeira
 Date: 2021.08

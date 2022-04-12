@@ -1,5 +1,5 @@
 """
-Program: pong
+Program: car-game
 Description: Turtle Against Cars. Implementation done with OOP.
 Author: Joao Teixeira
 Date: 2021.09
@@ -52,8 +52,7 @@ create_cars_wave(cars_waves, level) # initialize with one wave
 
 
 # Draw
-while not game_over:
-   
+while not game_over: 
    if pass_level:
       level += 1
       print(f'DEBUG Level = {level}')
@@ -96,7 +95,6 @@ while not game_over:
       if player.has_reach_finish_line((0, screen_size[1])):
          game_loop = False
          pass_level = True
-      
       
       # Update GUI
       scoreboard.gui.clear()
