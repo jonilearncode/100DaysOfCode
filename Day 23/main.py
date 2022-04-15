@@ -6,6 +6,7 @@ Date: 2022.04
 Version: 1.202204
 """
 
+from operator import index
 import pandas as pd
 import turtle
 
@@ -42,31 +43,45 @@ def update_score(score, score_object):
     score_object.setpos(0,screen_size[1]-40)
     score_object.write(arg=f'Score: {score}/50',move=True,font=style, align='center')
 
+def get_states_missed(states_guessed, data):
+    result = []
+    all_states = data.state.to_list()
+    for s in all_states:
+        if s not in states_guessed:
+            result.append(s)
+    return result
+      
+
 # Main logic
-#Get tuple of states names and coordinates from csv with pandas
 data = pd.read_csv('50_states.csv')
 states_names = data['state']
 score = 0
+record_answers = {}
+states_answered = []
 while score <= 50:
-    #Prompt user with state
-    user_answer = get_user_answer()
-    user_answer = user_answer[0].upper() + user_answer[1:].lower()
-    #Check if answer exists on state list
+    user_answer = get_user_answer().title() # .title() is equal --> user_answer[0].upper() + user_answer[1:].lower()
     coord = get_coordinates_with_name(user_answer, data)
     if coord != -1:
-    #   create a turtle text with the state name on respective coordinates
         state_label = turtle.Turtle()
         state_label.ht()
         state_label.pu()
         state_label.setpos(coord)
         state_label.write(arg=user_answer,move=True)
         score += 1
+        states_answered.append(user_answer)
         update_score(score, score_label)
-    #   Reduce a point from the score countdown
-    #If false:
-    #   Display game over
-    else: 
-        break
+    else:
+        #Write wrong answers to a dict
+        record_answers[user_answer] = 'Wrong Answer'
+        if user_answer == 'Exit':
+            # Game over
+            states_missed = get_states_missed(states_answered, data)
+            wrong_answers_data = pd.DataFrame.from_dict(record_answers, orient='index')
+            states_missed_data = pd.DataFrame(states_missed)
+            wrong_answers_data.to_csv('answers.csv')
+            states_missed_data.to_csv('to_study.csv')
+            break
+    
     screen.update()
 
 #End game
