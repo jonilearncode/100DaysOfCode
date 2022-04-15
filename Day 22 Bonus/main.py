@@ -15,7 +15,7 @@ def get_list_names(path_to_txt):
     names_list = []
     with open(path_to_txt) as file:
         for name in file:
-             names_list.append(name[:-1]) # removes extra unnecessary characters: '/n'
+             names_list.append(name.strip()) # removes extra unnecessary characters: '/n'
     return names_list
 
 def get_standard_letter(path_to_txt):
